@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-around flex-wrap">
+            {# boucle sur le tableau $articles du controller#}
+            {% for key, item in articles %}
+            <div class="card" style="width: 450px; margin-top: 50px">
+                <div class="card-header">
+                    Créé le {{ item.getDate | date("d/m/Y") }}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.getTitre }}</h5>
+                    <p class="card-text">{{ item.getContenu }}</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
