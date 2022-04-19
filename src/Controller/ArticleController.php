@@ -51,7 +51,7 @@ class ArticleController extends AbstractController
         // Récupération des articles de l'utilisateur connecté
         $articles = $user->getArticles();
         return $this->render('article/show.html.twig', [
-            'articles' => $articles,
+            'articles' => $articles
         ]);
     }
 }
