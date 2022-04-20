@@ -4,9 +4,11 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Controller\Admin\UserCrudController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
@@ -24,7 +26,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Website Skeleton')
+            ->setTitle('Symfony CMS')
             //->setTitle('<img src="..."> ACME <span class="text-small">Corp.</span>'
             ->setFaviconPath('favicon.svg')
             ->setTranslationDomain('my-custom-domain')
@@ -37,13 +39,19 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         return [
-            MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
+            MenuItem::linkToRoute('Aller sur le site', 'fa fa-undo', 'app_accueil'),
 
-            MenuItem::section('Articles'),
-            MenuItem::linkToCrud('Article', 'fa fa-tags', Article::class),
+            MenuItem::subMenu('Articles', 'fa fa-newspaper')->setSubItems([
+                MenuItem::linkToCrud('Liste des articles', 'fa fa-newspaper', Article::class),
+                MenuItem::linkToCrud('Ajouter un article', 'fa fa-plus', Article::class)->setAction(Crud::PAGE_NEW),
+            ]),
 
-            MenuItem::section('Users'),
-            MenuItem::linkToCrud('User', 'fa fa-user', User::class),
+            MenuItem::subMenu('Users', 'fa fa-user')->setSubItems([
+                MenuItem::linkToCrud('Liste des users', 'fa fa-user', User::class),
+                MenuItem::linkToCrud('Ajouter un user', 'fa fa-plus', User::class)->setAction(Crud::PAGE_NEW),
+            ]),
+
+            MenuItem::linkToCrud('Commentaires', 'fa fa-comment', Comment::class),
         ];
     }
 }

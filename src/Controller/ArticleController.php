@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use DateTime;
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use App\Form\CommentType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,8 +60,12 @@ class ArticleController extends AbstractController
     #[Route('/article/{id}', name: 'show_article_id')]
     public function showOne(Article $article): Response
     {
-        return $this->render('article/showOne.html.twig', [
-            'article' => $article
+        $comment = new Comment($article);
+        $commentForm = $this->createForm(CommentType::class, $comment);
+
+        return $this->renderForm('article/showOne.html.twig', [
+            'article' => $article,
+            'commentForm' => $commentForm
         ]);
     }
 }

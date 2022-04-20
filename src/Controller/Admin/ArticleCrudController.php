@@ -23,7 +23,7 @@ class ArticleCrudController extends AbstractCrudController
         return [
             TextField::new('titre'),
             TextareaField::new('contenu'),
-            TextField::new('imageFile')->setFormType(VichImageType::class)->hideOnIndex()->hideWhenUpdating(),
+            TextField::new('imageFile')->setFormType(VichImageType::class)->hideOnIndex()->hideWhenUpdating()->hideOnDetail(),
             ImageField::new('image')->setBasePath('/images/products')->hideWhenCreating()->setUploadDir('public\images\products'),
             DateTimeField::new('date')->hideOnForm()
         ];
