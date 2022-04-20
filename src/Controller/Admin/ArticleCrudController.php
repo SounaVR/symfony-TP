@@ -4,7 +4,9 @@ namespace App\Controller\Admin;
 
 use DateTime;
 use App\Entity\Article;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -21,6 +23,8 @@ class ArticleCrudController extends AbstractCrudController
         return [
             TextField::new('titre'),
             TextareaField::new('contenu'),
+            TextField::new('imageFile')->setFormType(VichImageType::class)->hideOnIndex()->hideWhenUpdating(),
+            ImageField::new('image')->setBasePath('/images/products')->hideWhenCreating()->setUploadDir('public\images\products'),
             DateTimeField::new('date')->hideOnForm()
         ];
     }

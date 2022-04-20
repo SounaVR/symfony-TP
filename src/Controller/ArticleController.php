@@ -54,4 +54,12 @@ class ArticleController extends AbstractController
             'articles' => $articles
         ]);
     }
+
+    #[Route('/article/{id}', name: 'show_article_id')]
+    public function showOne(Article $article): Response
+    {
+        return $this->render('article/showOne.html.twig', [
+            'article' => $article
+        ]);
+    }
 }

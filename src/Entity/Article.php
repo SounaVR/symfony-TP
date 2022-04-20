@@ -40,7 +40,7 @@ class Article
      */
     private $imageFile;
 
-    public function setImageFile(File $image = null)
+    public function setImageFile(?File $image = null)
     {
         $this->imageFile = $image;
     }

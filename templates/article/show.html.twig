@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ item.getTitre }}</h5>
                     <p class="card-text">{{ item.getContenu }}</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="{{ path('show_article_id', {id: item.getId}) }}" class="btn btn-primary">Voir l'article</a>
                 </div>
             </div>
             {% endfor %}
