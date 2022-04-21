@@ -8,7 +8,7 @@
         <div class="col-md-12 d-flex justify-content-around flex-wrap">
             {# boucle sur le tableau $articles du controller#}
             {% for article in pagination %}
-            <div class="card" style="width: 450px; margin-top: 50px">
+            <div class="card">
                 <div class="card-header">
                     Créé le {{ article.date | date("d/m/Y") }}
                 </div>
