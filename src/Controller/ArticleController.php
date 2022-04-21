@@ -68,7 +68,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/article/{id}', name: 'show_article_id')]
+    #[Route('/articles/{id}', name: 'show_article_id')]
     public function showOne(Article $article): Response
     {
         $comment = new Comment($article);
