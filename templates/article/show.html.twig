@@ -7,23 +7,29 @@
     <div class="row">
         <div class="col-md-12 d-flex justify-content-around flex-wrap">
             {# boucle sur le tableau $articles du controller#}
-            {% for key, item in articles %}
+            {% for article in pagination %}
             <div class="card" style="width: 450px; margin-top: 50px">
                 <div class="card-header">
-                    Créé le {{ item.getDate | date("d/m/Y") }}
+                    Créé le {{ article.date | date("d/m/Y") }}
                 </div>
-                {% if item.getimage %}
-                    <img src="images/products/{{ item.getImage }}" class="card-img-top">
+                {% if article.image %}
+                    <img src="{{ vich_uploader_asset(article, 'imageFile')|imagine_filter('square') }}" class="card-img-top">
                 {% else %}
                 {% endif %}
                 <div class="card-body">
-                    <h5 class="card-title">{{ item.getTitre }}</h5>
-                    <p class="card-text">{{ item.getContenu }}</p>
-                    <a href="{{ path('show_article_id', {id: item.getId}) }}" class="btn btn-primary">Voir l'article</a>
+                    <h5 class="card-title">{{ article.titre }}</h5>
+                    <p class="card-text">{{ article.contenu }}</p>
+                    <a href="{{ path('show_article_id', {id: article.id}) }}" class="btn btn-primary">Voir l'article</a>
                 </div>
             </div>
             {% endfor %}
         </div>
+    </div>
+</div>
+
+<div class="container d-flex justify-content-around mt-4">
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
     </div>
 </div>
 {% endblock %}

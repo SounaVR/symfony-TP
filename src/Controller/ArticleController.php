@@ -8,6 +8,7 @@ use App\Entity\Comment;
 use App\Form\ArticleType;
 use App\Form\CommentType;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -46,14 +47,24 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/articles', name: 'show_article')]
-    public function show(): Response
+    public function show(ManagerRegistry $doctrine, PaginatorInterface $paginator, Request $request): Response
     {
         // Récupération de l'utilisateur connecté
         $user = $this->getUser();
         // Récupération des articles de l'utilisateur connecté
         $articles = $user->getArticles();
+
+        $repository = $doctrine->getRepository(Article::class);
+
+        $pagination = $paginator->paginate(
+            $repository->findAll(),
+            $request->query->getInt('page', 1),
+            2
+        );
+
         return $this->render('article/show.html.twig', [
-            'articles' => $articles
+            'articles' => $articles,
+            'pagination' => $pagination
         ]);
     }
 

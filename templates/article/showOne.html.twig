@@ -12,7 +12,7 @@
                     Créé le {{ article.date | date("d/m/Y") }}
                 </div>
                 {% if article.image %}
-                    <img src="/images/products/{{ article.image }}" class="card-img-top">
+                    <img src="{{ vich_uploader_asset(article, 'imageFile')|imagine_filter('square') }}" class="card-img-top">
                 {% else %}
                 {% endif %}
                 <div class="card-body">

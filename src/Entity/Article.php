@@ -50,7 +50,7 @@ class Article
         $this->comments = new ArrayCollection();
     }
 
-    public function setImageFile(?File $image = null)
+    public function setImageFile(File $image = null)
     {
         $this->imageFile = $image;
     }
