@@ -6,6 +6,5 @@ kernel:
     resource: ../src/Kernel.php
     type: annotation
 
-
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.yaml"
